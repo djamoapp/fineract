@@ -91,7 +91,6 @@ gradle clean bootRun'''
 ext['groovy.version'] = '3.0.10'
 ext['swaggerFile'] = "$rootDir/fineract-provider/build/classes/java/main/static/fineract.yaml".toString()
 
-jib.to.image = '584776953832.dkr.ecr.us-east-2.amazonaws.com/fineract:latest'
 
 allprojects  {
     group = 'org.apache.fineract'

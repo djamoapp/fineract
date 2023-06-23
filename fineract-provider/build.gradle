@@ -245,7 +245,7 @@ jib {
     }
 
     to {
-        image = 'fineract'
+        image = '584776953832.dkr.ecr.us-east-2.amazonaws.com/fineract'
         tags = [
             "${project.version}",
             'latest'
