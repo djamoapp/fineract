@@ -12,6 +12,8 @@ jobs:
       - setup_remote_docker
       - aws-ecr/ecr-login
       - run: ./gradlew :fineract-provider:jibDockerBuild -x test
+      - run: docker tag fineract:latest 584776953832.dkr.ecr.us-east-2.amazonaws.com/fineract:latest
+      - run: docker push 584776953832.dkr.ecr.us-east-2.amazonaws.com/fineract:latest
 
 workflows:
   staging-build-image:
