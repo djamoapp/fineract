@@ -20,3 +20,7 @@ workflows:
     jobs:
       - build-and-push-image:
           context: aws-registry-creds
+          filters:
+            branches:
+              only:
+                - staging
