@@ -9,6 +9,7 @@ jobs:
       - image: cimg/openjdk:17.0.7
     steps:
       - checkout
+      - setup_remote_docker
       - aws-ecr/ecr-login
       - run: ./gradlew :fineract-provider:jibDockerBuild -x test
 
