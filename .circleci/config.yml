@@ -5,6 +5,8 @@ orbs:
 
 jobs:
   build-and-push-image:
+    environment:
+      VERSION: '1.8.4'
     docker:
       - image: cimg/openjdk:17.0.7
     steps:
@@ -12,8 +14,8 @@ jobs:
       - setup_remote_docker
       - aws-ecr/ecr-login
       - run: ./gradlew :fineract-provider:jibDockerBuild -x test
-      - run: docker tag fineract:latest 584776953832.dkr.ecr.us-east-2.amazonaws.com/fineract:latest
-      - run: docker push 584776953832.dkr.ecr.us-east-2.amazonaws.com/fineract:latest
+      - run: docker tag fineract:latest "$AWS_ECR_REGISTRY_ID.dkr.ecr.us-east-2.amazonaws.com/fineract:$VERSION"
+      - run: docker push "$AWS_ECR_REGISTRY_ID.dkr.ecr.us-east-2.amazonaws.com/fineract:$VERSION"
 
 workflows:
   staging-build-image:
