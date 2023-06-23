@@ -10,9 +10,10 @@ jobs:
     steps:
       - checkout
       - aws-ecr/ecr-login
-      - run: ./gradlew :fineract-provider:jibDockerBuild -x test 
+      - run: ./gradlew :fineract-provider:jibDockerBuild -x test
 
 workflows:
   staging-build-image:
     jobs:
-      - build-and-push-image
+      - build-and-push-image:
+          context: aws-registry-creds
