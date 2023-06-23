@@ -1,17 +1,18 @@
 version: 2.1
 
 orbs:
-  ci-cd: djamoapp/ci-cd@0.1.2
+  aws-ecr: circleci/aws-ecr@8.2.1
+
+jobs:
+  build-and-push-image:
+    docker:
+      - image: cimg/openjdk:17.0.7
+    steps:
+      - checkout
+      - aws-ecr/ecr-login
+      - run: ./gradlew :fineract-provider:jibDockerBuild -x test 
 
 workflows:
   staging-build-image:
     jobs:
-      - ci-cd/build-and-push-image:
-          ecr-repo: fineract
-          app-env: staging
-          context: [aws-registry-creds, slack-secrets]
-          channel: C05CBV9L9G8
-          filters:
-            branches:
-              only:
-                - 1.7.3
+      - build-and-push-image
