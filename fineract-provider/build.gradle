@@ -250,6 +250,12 @@ jib {
             "${project.version}"
         ]
     }
+    platforms {
+        platform {
+            architecture = 'arm64'
+            os = 'linux'
+        }
+    }
 
     container {
         creationTime = 'USE_CURRENT_TIMESTAMP'
