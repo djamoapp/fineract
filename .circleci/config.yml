@@ -6,13 +6,18 @@ orbs:
 jobs:
   build-and-push-image:
     environment:
-      VERSION: '1.8.4'
-    docker:
-      - image: cimg/openjdk:17.0.7
+      VERSION: '1.8.4-arm'
+    machine:
+      image: ubuntu-2004:current
+    resource_class: arm.medium
     steps:
       - checkout
-      - setup_remote_docker
       - aws-ecr/ecr-login
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y openjdk-17-jdk gradle
       - run: ./gradlew :fineract-provider:jibDockerBuild -x test
       - run: docker tag fineract:latest "$AWS_ECR_REGISTRY_ID.dkr.ecr.us-east-2.amazonaws.com/fineract:$VERSION"
       - run: docker push "$AWS_ECR_REGISTRY_ID.dkr.ecr.us-east-2.amazonaws.com/fineract:$VERSION"
