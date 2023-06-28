@@ -242,6 +242,12 @@ bootJar {
 jib {
     from {
         image = 'arm64v8/openjdk:17'
+        platforms {
+            platform {
+                architecture = 'arm64'
+                os = 'linux'
+            }
+        }
     }
 
     to {
@@ -249,12 +255,6 @@ jib {
         tags = [
             "${project.version}"
         ]
-    }
-    platforms {
-        platform {
-            architecture = 'arm64'
-            os = 'linux'
-        }
     }
 
     container {
