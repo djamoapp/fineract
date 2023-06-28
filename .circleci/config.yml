@@ -6,7 +6,7 @@ orbs:
 jobs:
   build-and-push-image:
     environment:
-      VERSION: '1.8.4-arm'
+      VERSION: '1.8.4-arm-2'
     machine:
       image: ubuntu-2004:current
     resource_class: arm.medium
